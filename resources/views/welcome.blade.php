@@ -23,6 +23,8 @@
                     @auth
                         <a href="{{ url('/dashboard') }}" class="text-white hover:text-gray-300">Dashboard</a>
                         <a href="{{ route('blogs.index') }}" class="text-white hover:text-gray-300">Blog</a>
+                        <a href="{{ route('blogs.create') }}" class="text-white hover:text-gray-300">Create</a>
+
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit" class="text-white hover:text-gray-300">Logout</button>
