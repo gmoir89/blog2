@@ -7,8 +7,9 @@
 
         <h3>Images:</h3>
         @foreach ($blog->images as $image)
-            <img src="{{ asset('storage/app/images/' . $image->path) }}" alt="Image">
+            <img src="{{ asset('storage/' . $image->path) }}" alt="Image" style="max-width: 33%; height: auto;">
         @endforeach
+
 
         <h3>Comments:</h3>
         @forelse ($comments as $comment)
