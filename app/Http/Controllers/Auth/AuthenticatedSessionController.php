@@ -29,7 +29,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // Update the redirection based on your requirement
+        return redirect()->intended('/'); // Change '/welcome' to your desired welcome page URL
     }
 
     /**

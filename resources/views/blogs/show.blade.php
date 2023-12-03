@@ -40,6 +40,9 @@
             <textarea name="content" rows="3" required></textarea>
             <button type="submit">Submit Comment</button>
         </form>
+
+        <a href="{{ route('blogs.index') }}">Back to Posts</a>
+
     </div>
 @endsection
 
