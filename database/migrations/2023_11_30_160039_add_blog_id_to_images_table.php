@@ -9,21 +9,24 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    // database/migrations/2023_11_30_000000_add_blog_id_to_images_table.php
+    public function up()
+    {
+        Schema::table('images', function (Blueprint $table) {
+            // Check if the column exists before adding it
+            if (!Schema::hasColumn('images', 'blog_id')) {
+                $table->foreignId('blog_id')->constrained();
+            }
+        });
+    }
 
-public function up()
-{
-    Schema::table('images', function (Blueprint $table) {
-        $table->foreignId('blog_id')->constrained(); // Add this line
-    });
-}
-
-public function down()
-{
-    Schema::table('images', function (Blueprint $table) {
-        $table->dropForeign(['blog_id']);
-        $table->dropColumn('blog_id'); // Add this line if you want to rollback
-    });
-}
-
+    /**
+     * Reverse the migrations.
+     */
+    public function down()
+    {
+        Schema::table('images', function (Blueprint $table) {
+            $table->dropForeign(['blog_id']);
+            $table->dropColumn('blog_id'); // Add this line if you want to rollback
+        });
+    }
 };

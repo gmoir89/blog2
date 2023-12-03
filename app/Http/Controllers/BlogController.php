@@ -66,7 +66,7 @@ class BlogController extends Controller
     public function edit(Blog $blog)
     {
         // Authorize the user to edit the blog
-        $this->authorize('update', $blog);
+        // $this->authorize('update', $blog);
 
         return view('blogs.edit', compact('blog'));
     }

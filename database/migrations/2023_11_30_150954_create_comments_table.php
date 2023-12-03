@@ -17,6 +17,9 @@ return new class extends Migration
             $table->foreignId('blog_id')->constrained();
             $table->text('content');
             $table->timestamps();
+
+            // Manually create the foreign key constraint for user_id
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

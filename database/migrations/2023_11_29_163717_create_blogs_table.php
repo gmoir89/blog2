@@ -13,9 +13,18 @@ return new class extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->string('title'); // Add this line
-            $table->text('content'); // Add this line
+            $table->string('title');
+            $table->text('content');
             $table->timestamps();
+        });
+
+        Schema::create('comments', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('blog_id');
+            $table->text('content');
+            $table->timestamps();
+
+            $table->foreign('blog_id')->references('id')->on('blogs')->onDelete('cascade');
         });
     }
 
@@ -24,6 +33,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('comments');
         Schema::dropIfExists('blogs');
     }
 };
+
