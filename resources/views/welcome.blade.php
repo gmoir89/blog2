@@ -18,6 +18,7 @@
 <body class="antialiased">
     <nav class="navbar navbar-dark bg-dark">
         <div class="container">
+            <span class="navbar-brand mb-0 h1 text-white">Graeme's Bloggy</span>
             @if (Route::has('login'))
                 <div class="ml-auto">
                     @auth

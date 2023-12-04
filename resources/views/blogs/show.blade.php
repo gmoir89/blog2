@@ -10,7 +10,6 @@
             <img src="{{ asset('storage/' . $image->path) }}" alt="Image" style="max-width: 33%; height: auto;">
         @endforeach
 
-
         <h3>Comments:</h3>
         @forelse ($comments as $comment)
             <p>
@@ -25,24 +24,29 @@
 
         {{-- Remove the @auth and @if directives --}}
         <div>
-            <a href="{{ route('blogs.edit', $blog) }}">Edit</a>
-            <form action="{{ route('blogs.destroy', $blog) }}" method="post" style="display: inline-block;">
-                @csrf
-                @method('DELETE')
-                <button type="submit">Delete</button>
-            </form>
+            @auth
+                <a href="{{ route('blogs.edit', $blog) }}">Edit</a>
+                <form action="{{ route('blogs.destroy', $blog) }}" method="post" style="display: inline-block;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Delete</button>
+                </form>
+            @endauth
         </div>
 
-        <h3>Add a Comment:</h3>
-        <form action="{{ route('comments.store') }}" method="post">
-            @csrf
-            <input type="hidden" name="blog_id" value="{{ $blog->id }}">
-            <textarea name="content" rows="3" required></textarea>
-            <button type="submit">Submit Comment</button>
-        </form>
+        @auth
+            <h3>Add a Comment:</h3>
+            <form action="{{ route('comments.store') }}" method="post">
+                @csrf
+                <input type="hidden" name="blog_id" value="{{ $blog->id }}">
+                <textarea name="content" rows="3" required></textarea>
+                <button type="submit">Submit Comment</button>
+            </form>
+        @else
+            <p>Login to leave a comment.</p>
+        @endauth
 
         <a href="{{ route('blogs.index') }}">Back to Posts</a>
 
     </div>
 @endsection
-
