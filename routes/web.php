@@ -37,4 +37,11 @@ Route::group(['middleware' => ['superuser']], function () {
 
 Route::get('/your-route', 'YourController@yourMethod')->middleware('superuser');
 
+
+use App\Http\Controllers\PasswordController;
+
+Route::name('password.')->group(function () {
+    Route::get('/change', [PasswordController::class, 'change'])->name('change');
+});
+
 require __DIR__.'/auth.php';

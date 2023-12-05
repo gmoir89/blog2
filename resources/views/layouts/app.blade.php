@@ -19,30 +19,34 @@
 </head>
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100">
-        <nav class="navbar navbar-dark bg-dark">
-            <div class="container">
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+        <div class="row w-100 justify-content-between">
+            <div class="col-auto">
                 <span class="navbar-brand mb-0 h1 text-white">Graeme's Bloggy</span>
-                @if (Route::has('login'))
-                    <div class="ml-auto">
-                        @auth
-                            <span class="navbar-text text-white">Hi, {{ Auth::user()->name }}</span>
-                            <a href="{{ url('/dashboard') }}" class="btn btn-light">Dashboard</a>
-                            <a href="{{ route('blogs.index') }}" class="btn btn-light">Blog</a>
-                            <a href="{{ route('blogs.create') }}" class="btn btn-light">Create</a>
-                            <form method="POST" action="{{ route('logout') }}" class="d-inline">
-                                @csrf
-                                <button type="submit" class="btn btn-light">Logout</button>
-                            </form>
-                        @else
-                            <a href="{{ route('login') }}" class="btn btn-light">Log in</a>
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="btn btn-light">Register</a>
-                            @endif
-                        @endauth
-                    </div>
-                @endif
             </div>
-        </nav>
+            @if (Route::has('login'))
+                <div class="col-auto text-center">
+                    @auth
+                        <span class="navbar-text text-white">Hi, {{ Auth::user()->name }}</span>
+                        <a href="{{ url('/dashboard') }}" class="btn btn-light">Dashboard</a>
+                        <a href="{{ route('blogs.index') }}" class="btn btn-light">Blog</a>
+                        <a href="{{ route('blogs.create') }}" class="btn btn-light">Create</a>
+                        <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                            @csrf
+                            <button type="submit" class="btn btn-light">Logout</button>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}" class="btn btn-light">Log in</a>
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="btn btn-light">Register</a>
+                        @endif
+                    @endauth
+                </div>
+            @endif
+        </div>
+    </div>
+</nav>
 
         <div class="container mt-4">
             @yield('content')
