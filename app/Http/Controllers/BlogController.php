@@ -80,24 +80,27 @@ class BlogController extends Controller
         // Fetch the blog using the $id parameter
         $blog = Blog::findOrFail($id);
     
-        // Authorize the user to update the blog
-        $this->authorize('editBlog', $blog);
+        // Check if the user is authenticated and is a superuser
+        if (auth()->check() && auth()->user()->is_superuser) {
+            // Validate the request data
+            $request->validate([
+                'title' => 'required|string|max:255',
+                'content' => 'required|string',
+            ]);
     
-        // Validate the request data
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-        ]);
+            // Update the blog
+            $blog->update([
+                'title' => $request->input('title'),
+                'content' => $request->input('content'),
+            ]);
     
-        // Update the blog
-        $blog->update([
-            'title' => $request->input('title'),
-            'content' => $request->input('content'),
-        ]);
+            // Redirect with success message
+            return redirect()->route('blogs.show', $blog)->with('success', 'Blog updated successfully!');
+        }
     
-        // Redirect with success message
-        return redirect()->route('blogs.show', $blog)->with('success', 'Blog updated successfully!');
-    }            
+        // If not a superuser, deny access
+        abort(403, 'Unauthorized action.');
+    }                
     
     public function destroy(Blog $blog)
     {
