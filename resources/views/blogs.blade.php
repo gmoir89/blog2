@@ -1,3 +1,4 @@
+
 <div class="container">
     <h2>All Blog Posts</h2>
     @forelse ($blogs as $blog)

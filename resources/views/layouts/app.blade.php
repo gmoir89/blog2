@@ -19,31 +19,34 @@
 </head>
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100">
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <div class="row w-100 justify-content-between">
-            <div class="col-auto">
-                <span class="navbar-brand mb-0 h1 text-white">Graeme's Bloggy</span>
-            </div>
-            @if (Route::has('login'))
-                <div class="col-auto text-center">
+        <a class="navbar-brand" href="#">Graeme's Bloggy</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="navbar-nav ml-auto">
+                @if (Route::has('login'))
                     @auth
                         <span class="navbar-text text-white">Hi, {{ Auth::user()->name }}</span>
-                        <a href="{{ url('/dashboard') }}" class="btn btn-light">Dashboard</a>
-                        <a href="{{ route('blogs.index') }}" class="btn btn-light">Blog</a>
-                        <a href="{{ route('blogs.create') }}" class="btn btn-light">Create</a>
+                        <a href="{{ url('/dashboard') }}" class="nav-item nav-link">Dashboard</a>
+                        <a href="{{ route('blogs.index') }}" class="nav-item nav-link">Blog</a>
+                        <a href="{{ route('blogs.create') }}" class="nav-item nav-link">Create</a>
                         <form method="POST" action="{{ route('logout') }}" class="d-inline">
                             @csrf
                             <button type="submit" class="btn btn-light">Logout</button>
                         </form>
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-light">Log in</a>
+                        <a href="{{ route('login') }}" class="nav-item nav-link">Log in</a>
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="btn btn-light">Register</a>
+                            <a href="{{ route('register') }}" class="nav-item nav-link">Register</a>
                         @endif
                     @endauth
-                </div>
-            @endif
+                @endif
+            </div>
         </div>
     </div>
 </nav>

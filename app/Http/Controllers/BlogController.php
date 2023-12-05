@@ -104,17 +104,12 @@ class BlogController extends Controller
     
     public function destroy(Blog $blog)
     {
-        // Authorize the user to delete the blog
-        if (Gate::denies('delete-blog', $blog)) {
-            abort(403); // User is not authorized
-        }
-        // Authorize the user to delete the blog
         $this->authorize('delete', $blog);
-
+    
         $blog->delete();
-
+    
         return redirect()->route('blogs.index')->with('success', 'Blog deleted successfully!');
-    }
+    }    
 
     public function __construct()
     {
